@@ -6,10 +6,12 @@ class Result extends StatelessWidget {
     Key? key,
     required String stringKelvin,
     required String stringReamur,
-  }) : _stringKelvin = stringKelvin, _stringReamur = stringReamur, super(key: key);
+    required String stringFahrenheit,
+  }) : _stringKelvin = stringKelvin, _stringReamur = stringReamur, _stringFahrenheit = stringFahrenheit, super(key: key);
 
   final String _stringKelvin;
   final String _stringReamur;
+  final String _stringFahrenheit;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,23 @@ class Result extends StatelessWidget {
             ),
             Text(
               '$_stringReamur',
+              style: const TextStyle(fontSize: 48),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+        Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              child: const Text(
+                'Suhu dalam Fahrenheit',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            Text(
+              '$_stringFahrenheit',
               style: const TextStyle(fontSize: 48),
             ),
           ],

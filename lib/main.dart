@@ -23,18 +23,22 @@ class _MyAppState extends State<MyApp> {
   double _inputUser = 0;
   double _kelvin = 0;
   double _reamur = 0;
+  double _fahrenheit = 0;
 
   String _stringKelvin = '0.0';
   String _stringReamur = '0.0';
+  String _stringFahrenheit = '0.0';
 
   void _temperatureConversion() {
     setState(() {
       _inputUser = double.parse(inputSuhuController.text);
       _kelvin = _inputUser + 273;
       _reamur = _inputUser * (4 / 5);
+      _fahrenheit = _inputUser * (9 / 5) + 32;
 
       _stringKelvin = _kelvin.toStringAsFixed(1);
       _stringReamur = _reamur.toStringAsFixed(1);
+      _stringFahrenheit = _fahrenheit.toStringAsFixed(1);
     });
   }
 
@@ -56,7 +60,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Input(inputSuhuController: inputSuhuController),
-              Result(stringKelvin: _stringKelvin, stringReamur: _stringReamur),
+              Result(stringKelvin: _stringKelvin, stringReamur: _stringReamur, stringFahrenheit: _stringFahrenheit),
               Convert(convertHandler: _temperatureConversion,),
             ],
           ),
