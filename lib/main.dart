@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_konversi_suhu/widget/convert.dart';
 import 'package:flutter_konversi_suhu/widget/input.dart';
 import 'package:flutter_konversi_suhu/widget/result.dart';
+import 'package:flutter_konversi_suhu/widget/riwayat.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,18 +26,29 @@ class _MyAppState extends State<MyApp> {
 
   var listItem = ["Kelvin", "Reamur", "Fahrenheit"];
 
+  List<String> listViewItem = <String>[];
+
   void _temperatureConversion() {
     setState(() {
       _inputUser = double.parse(inputSuhuController.text);
       if (_newValue == "Kelvin") {
         _result = _inputUser + 273;
+        listViewItem.add("Kelvin : $_result");
       }
         else if (_newValue == "Reamur") {
           _result = _inputUser * (4 / 5);
+          listViewItem.add("Reamur : $_result");
         }
       else {
           _result = _inputUser * (9 / 5) + 32;
+          listViewItem.add("Fahrenheit : $_result");
         }
+    });
+  }
+
+  void dropdownOnChanged(String? changeValue) {
+    setState(() {
+      _newValue = changeValue!;
     });
   }
 
@@ -52,11 +64,9 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Konversi Suhu'),
         ),
-        body: 
-        Container(
+        body: Container(
           margin: const EdgeInsets.all(8),
-          child: 
-          Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Input(inputSuhuController: inputSuhuController),
@@ -77,11 +87,7 @@ class _MyAppState extends State<MyApp> {
                     );
                   }).toList(),
                   value: _newValue,
-                  onChanged: (String? changeValue) {
-                    setState(() {
-                      _newValue = changeValue!;
-                    });
-                  },
+                  onChanged: dropdownOnChanged,
                 ),
               ),
               Result(
@@ -90,10 +96,16 @@ class _MyAppState extends State<MyApp> {
               Convert(
                 convertHandler: _temperatureConversion,
               ),
-              Container(),
-              Expanded(
-                child: ListView(),
-              )
+              Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                child: const Text(
+                  "Riwayat Konversi",
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              Riwayat(listViewItem: listViewItem),
             ],
           ),
         ),
