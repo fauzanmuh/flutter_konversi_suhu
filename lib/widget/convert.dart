@@ -15,7 +15,7 @@ class Convert extends StatelessWidget {
         },
         child: const Text(
           'Konversi Suhu',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 20),
         ),
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(double.infinity, 50),
